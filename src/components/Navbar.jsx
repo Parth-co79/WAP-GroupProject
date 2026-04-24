@@ -1,6 +1,6 @@
 import styles from './Navbar.module.css';
 
-function Navbar({ searchQuery, setSearchQuery, darkMode, setDarkMode, onToggleSidebar, onGoHome, onGoCreate }) {
+function Navbar({ searchQuery, setSearchQuery, darkMode, setDarkMode, onToggleSidebar, onGoHome,handlePost }) {
     return (
         <nav className={styles.navbar}>
             <div className={styles.groupedNavAndLogo}>
@@ -30,7 +30,7 @@ function Navbar({ searchQuery, setSearchQuery, darkMode, setDarkMode, onToggleSi
             </div>
 
             <div className={styles.navbarRight}>
-                <button className={styles.navbarCreateBtn} onClick={onGoCreate}>
+                <button className={styles.navbarCreateBtn} onClick={handlePost}>
                     ＋ <span>Create Post</span>
                 </button>
                 <button

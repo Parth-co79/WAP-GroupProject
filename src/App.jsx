@@ -3,11 +3,18 @@ import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main"
 import "./App.css";
+// import {handlePost as Post} from "./components/Navbar";
+import CreatePost from "./components/CreatePost.jsx"
 
-export default function App() {
+export default function App({handlePost}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Initially closed as requested
+  const [toggle ,setToggle]=useState(false);
+
+  function handlePost(){
+    setToggle(true)
+  }
 
   const toggleSidebar = () => {
     console.log("Toggle clicked, new state:", !isSidebarOpen);
@@ -26,11 +33,13 @@ export default function App() {
         setDarkMode={setDarkMode}
         onToggleSidebar={toggleSidebar}
         onGoHome={goHome}
-        onGoCreate={goCreate}
+        handlePost={handlePost}
+
       />
       <div className="main-layout">
         <Sidebar isOpen={isSidebarOpen} />
-        <Main/>
+        {toggle ?<CreatePost/>:<Main/>}
+        {/* <Main/> */}
       </div>
     </div>
   );
