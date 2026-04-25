@@ -53,10 +53,27 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: bold;
-  font-size: 1.25rem;
-  color: #ff4500;
   text-decoration: none;
+}
+
+.navbarLogoIcon {
+  width: 36px;
+  height: 36px;
+  background-color: #ff4500;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.navbarLogoText {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
 }
 
 .navbarCreateBtn {
