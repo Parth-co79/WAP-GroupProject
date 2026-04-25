@@ -261,7 +261,7 @@ body {
   flex-direction: column;
   position: sticky;
   top: 70px;
-  height: fit-content;
+  min-height: calc(100vh - 90px);
 }
 
 /* Text Color Fixes for Dark Mode */
@@ -271,4 +271,37 @@ h2 {
 
 .post {
   color: var(--text-main);
+}
+
+/* Sidebar Footer */
+.sidebarFooter {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  padding: 16px 20px;
+  width: 320px;
+}
+
+.footerLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+.footerLinks a {
+  color: #7a8b98;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.footerLinks a:hover {
+  text-decoration: underline;
+  color: #a0aeb8;
+}
+
+.footerCopy {
+  margin-top: 10px;
+  color: #7a8b98;
+  font-size: 12px;
 }

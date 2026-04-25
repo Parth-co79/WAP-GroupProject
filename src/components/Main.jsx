@@ -329,6 +329,15 @@ function Main({ searchQuery }) {
       </div>
       <aside className={styles.rightSidebar}>
         <PopularCommunities />
+        <div className={styles.sidebarFooter}>
+          <div className={styles.footerLinks}>
+            <a >Reddit Rules</a>
+            <a >Privacy Policy</a>
+            <a >User Agreement</a>
+            <a >Accessibility</a>
+          </div>
+          <p className={styles.footerCopy}>Reddit, Inc. &copy; 2026. All rights reserved.</p>
+        </div>
       </aside>
     </div>
   );
