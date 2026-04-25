@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShare } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faShare } from "@fortawesome/free-solid-svg-icons";
 import styles from "./Main.module.css";
 import { faUps } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -51,6 +51,26 @@ function Main() {
   const [isJoinId, setIsJoinId] = useState(false);
   const [openMenuId, setOpenMenuId] = useState(null);
 
+  const [openSort, setOpenSort] = useState(false);
+  const [sortType, setSortType] = useState("Best");
+
+
+  const handleSort = (type) => {
+  setSortType(type);
+  setOpenSort(!openSort);
+  if (type==="Top"){
+    function getTopPost(){
+      setPosts(posts.sort((item1,item2)=>item2["votes"]-item1["votes"]))
+    }
+    getTopPost();
+  }
+  else if (type==="Best"){
+    function getTopPost(){
+      setPosts(posts.sort((item1,item2)=>(item2["votes"]+item2["comments"])-(item1["votes"]+item1["comments"])))
+    }
+    getTopPost();
+  }
+};
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -83,7 +103,7 @@ function Main() {
     };
     fetchpost();
   }, []);
-  
+
   useEffect(() => {
     function handleClick(e) {
       if (!e.target.closest(`.${styles.menuJoin}`)) {
@@ -98,6 +118,32 @@ function Main() {
   return (
     <div className={styles.mainBody}>
       <div className={styles.postsContainer}>
+        <div className={styles.sortWrapper}>
+          <button
+            className={styles.sortBtn}
+            onClick={() => {
+              setOpenSort(!openSort);
+            }}
+          >
+            {sortType}
+            <span>
+              <FontAwesomeIcon icon={faAngleDown} />
+            </span>
+          </button>
+          {openSort && (
+            <div className={styles.sortMenu}>
+              {["Best", "Hot", "New", "Top",].map((item) => (
+                <div
+                  key={item}
+                  className={styles.sortItem}
+                  onClick={() => handleSort(item)}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         {(fetchError && <p>{`Error:${fetchError}`}</p>) ||
           (fetchUserError && <p>{`Error:${fetchUserError}`}</p>)}
         {!fetchError &&
@@ -148,7 +194,7 @@ function Main() {
                           icon={faThumbsUp}
                         />
                       </button>
-                      <span>{post.votes}</span>
+                      <span>{post.votes<1000?post.votes:`${Number((post.votes)/1000)}k`}</span>
                       <button>
                         <FontAwesomeIcon
                           className={styles.icon}
@@ -164,7 +210,7 @@ function Main() {
                           icon={faCommentAlt}
                         />
                       </button>
-                      <span className="span">{post.votes}</span>
+                      <span className="span">{post.comments<1000?post.comments:`${Number((post.comments)/1000)}k`}</span>
                     </a>
                     <span className={styles.share}>
                       <button>

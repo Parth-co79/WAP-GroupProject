@@ -157,7 +157,7 @@ body{
 }
 .postFooter{
   display: flex;
-  gap: 20px;
+  gap: 12px;
 }
 .postFooter > *{
   background-color: #e1e7ef;
@@ -184,4 +184,44 @@ body{
 }
 .postFooter button{
   border: none;
+}
+
+.sortWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Button */
+.sortBtn {
+  background: #f6f7f8;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Dropdown */
+.sortMenu {
+  position: absolute;
+  top: 110%;
+  left: 0;
+
+  width: 150px;
+  background: white;
+  border-radius: 12px;
+  padding: 6px 0;
+
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+/* Items */
+.sortItem {
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.sortItem:hover {
+  background-color: #f2f2f2;
 }
