@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main"
+import Login_Signup from "./components/Login_Signup.jsx"
 import "./App.css";
 // import {handlePost as Post} from "./components/Navbar";
 import CreatePost from "./components/CreatePost.jsx"
@@ -20,6 +21,11 @@ export default function App({handlePost}) {
   }, [darkMode]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Initially closed as requested
   const [toggle ,setToggle]=useState(false);
+  const [isLog,setIsLog] = useState(false)
+
+  function handleLog(){
+    setIsLog(true)
+  }
 
   function handlePost(){
     setToggle(true)
@@ -35,6 +41,8 @@ export default function App({handlePost}) {
 
   return (
     <div className={`app-container ${darkMode ? "dark" : "light"}`}>
+      {isLog!==true&&<Login_Signup handleLog={handleLog}/>}
+      {isLog&&
       <Navbar
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
@@ -45,11 +53,14 @@ export default function App({handlePost}) {
         handlePost={handlePost}
 
       />
+}
+      {isLog &&
       <div className="main-layout">
         <Sidebar isOpen={isSidebarOpen} />
         {toggle ?<CreatePost/>:<Main/>}
         {/* <Main/> */}
       </div>
+}
     </div>
   );
 }
