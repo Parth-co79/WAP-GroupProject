@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import PopularCommunities from "./PopularCommunities";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleDown, faShare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown,
+  faListDots,
+  faShare,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "./Main.module.css";
 import {
   faThumbsUp,
@@ -11,6 +15,8 @@ import {
   faBookmark,
   faEyeSlash,
   faFlag,
+  faDotCircle,
+  faCommentDots,
 } from "@fortawesome/free-regular-svg-icons";
 
 function HandleMenu() {
@@ -27,7 +33,7 @@ function HandleMenu() {
           return (
             <div className={styles.links}>
               <span>
-                {" "}
+                {/* {" "} */}
                 <FontAwesomeIcon icon={item.icon} />
               </span>
               <a href="/">{item.name}</a>
@@ -42,6 +48,8 @@ function Main() {
   const API_URL_POSTS = "http://localhost:3700/posts";
   const API_URL_USERS = "http://localhost:3700/users";
 
+  const [seeFullContent, setSeeFullContent] = useState(null);
+
   const [posts, setPosts] = useState([]);
   const [fetchError, setFetchError] = useState(null);
 
@@ -51,6 +59,82 @@ function Main() {
   const [isJoinId, setIsJoinId] = useState(false);
   const [openMenuId, setOpenMenuId] = useState(null);
 
+  const [openSort, setOpenSort] = useState(false);
+  const [sortType, setSortType] = useState("Best");
+
+  const handleSort = (type) => {
+    setSortType(type);
+    setOpenSort(!openSort);
+    if (type === "Top") {
+      function getTopPost() {
+        setPosts(posts.sort((item1, item2) => item2["votes"] - item1["votes"]));
+      }
+      getTopPost();
+    } else if (type === "Best") {
+      function getTopPost() {
+        setPosts(
+          posts.sort(
+            (item1, item2) =>
+              item2["votes"] +
+              item2["comments"] -
+              (item1["votes"] + item1["comments"]),
+          ),
+        );
+      }
+      getTopPost();
+    } else if (type === "New") {
+      function getTopPost() {
+        setPosts(
+          posts.sort(
+            (item1, item2) =>
+              new Date(item2["createdAt"]) - new Date(item1["createdAt"]),
+          ),
+        );
+      }
+      getTopPost();
+    } else if (type === "Hot") {
+      function getScore(postItem) {
+        const age =
+          (Date.now() - new Date(postItem.createdAt)) / (1000 * 60 * 60);
+        const enagement = postItem.votes + postItem.comments * 2;
+        const hotness = enagement / (age + 1);
+        return hotness;
+      }
+      function getTopPost() {
+        setPosts(
+          posts.sort((item1, item2) => getScore(item1) - getScore(item2)),
+        );
+      }
+      getTopPost();
+    }
+  };
+
+  function getTimeAgo(createdAt) {
+    const now = new Date();
+    const postTime = new Date(createdAt);
+
+    const diff = now - postTime;
+
+    const minutes = Math.floor(diff / (1000 * 60));
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const months = Math.floor(days / 30);
+    const years = Math.floor(days / 365);
+
+    if (minutes < 60) {
+      return `${minutes} min ago`;
+    }
+    if (hours < 24) {
+      return `${hours} hr ago`;
+    }
+    if (days < 30) {
+      return `${days} days ago`;
+    }
+    if (months < 12) {
+      return `${months} months ago`;
+    }
+    return `${years} years ago`;
+  }
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -98,6 +182,32 @@ function Main() {
   return (
     <div className={styles.mainBody}>
       <div className={styles.postsContainer}>
+        <div className={styles.sortWrapper}>
+          <button
+            className={styles.sortBtn}
+            onClick={() => {
+              setOpenSort(!openSort);
+            }}
+          >
+            {sortType}
+            <span>
+              <FontAwesomeIcon icon={faAngleDown} />
+            </span>
+          </button>
+          {openSort && (
+            <div className={styles.sortMenu}>
+              {["Best", "Hot", "New", "Top"].map((item) => (
+                <div
+                  key={item}
+                  className={styles.sortItem}
+                  onClick={() => handleSort(item)}
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
         {(fetchError && <p>{`Error:${fetchError}`}</p>) ||
           (fetchUserError && <p>{`Error:${fetchUserError}`}</p>)}
         {!fetchError &&
@@ -114,6 +224,8 @@ function Main() {
                     <div className={styles.UserProfile}>
                       <img src={userDetails.avatar} alt="?" />
                       <a href="">r/{userDetails?.username || "Unknown User"}</a>
+                      {/* <span>•</span> */}
+                      <span>{`•${getTimeAgo(post.createdAt)}`}</span>
                     </div>
                     <div className={styles.menuJoin}>
                       <button
@@ -137,7 +249,29 @@ function Main() {
                     </div>
                   </div>
                   <h2>{post.title}</h2>
-                  <p className={styles.post}>{post.content}</p>
+                  <p className={styles.post}>
+                    {post.content.length > 150 ? (
+                      <>
+                        {seeFullContent === post.id
+                          ? post.content
+                          : `${post.content.slice(0, 150)}...`}
+                        <span
+                          style={{ cursor: "pointer", color: "blue" }}
+                          onClick={() =>
+                            setSeeFullContent(
+                              seeFullContent === post.id ? null : post.id,
+                            )
+                          }
+                        >
+                          {seeFullContent === post.id
+                            ? " Read less"
+                            : " Read more"}
+                        </span>
+                      </>
+                    ) : (
+                      post.content
+                    )}
+                  </p>
                   {post.images && <img src={post.images[0]} alt="" />}
 
                   <div className={styles.postFooter}>
@@ -148,7 +282,11 @@ function Main() {
                           icon={faThumbsUp}
                         />
                       </button>
-                      <span>{post.votes}</span>
+                      <span>
+                        {post.votes < 1000
+                          ? post.votes
+                          : `${Number(post.votes / 1000)}k`}
+                      </span>
                       <button>
                         <FontAwesomeIcon
                           className={styles.icon}
@@ -164,7 +302,11 @@ function Main() {
                           icon={faCommentAlt}
                         />
                       </button>
-                      <span className="span">{post.votes}</span>
+                      <span className="span">
+                        {post.comments < 1000
+                          ? post.comments
+                          : `${Number(post.comments / 1000)}k`}
+                      </span>
                     </a>
                     <span className={styles.share}>
                       <button>
