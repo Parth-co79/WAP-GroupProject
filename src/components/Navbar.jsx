@@ -13,8 +13,8 @@ function Navbar({ searchQuery, setSearchQuery, darkMode, setDarkMode, onToggleSi
                 </button>
 
                 <a className={styles.navbarLogo} onClick={onGoHome} style={{ cursor: "pointer" }}>
-                    <div className={styles.navbarLogoIcon}>🔥</div>
-                    Reddit
+                    <div className={styles.navbarLogoIcon}>r/</div>
+                    <span className={styles.navbarLogoText}>RedditX</span>
                 </a>
             </div>
 
