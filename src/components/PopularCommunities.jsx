@@ -6,12 +6,12 @@ export default function PopularCommunities() {
         {
             name: "r/React_js",
             members: "12,312,981 members",
-            image: "https://picsum.photos/32?random=1"
+            image: "https://picsum.photos/id/8/32"
         },
         {
             name: "r/newtonRU",
             members: "5012 members",
-            image: "https://picsum.photos/id/1/32"
+            image: "https://picsum.photos/id/4/32"
         },
         {
             name: "webTechnologies",

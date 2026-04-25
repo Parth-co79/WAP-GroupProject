@@ -44,7 +44,7 @@ function HandleMenu() {
   );
 }
 
-function Main() {
+function Main({ searchQuery }) {
   const API_URL_POSTS = "http://localhost:3700/posts";
   const API_URL_USERS = "http://localhost:3700/users";
 
@@ -211,117 +211,121 @@ function Main() {
         {(fetchError && <p>{`Error:${fetchError}`}</p>) ||
           (fetchUserError && <p>{`Error:${fetchUserError}`}</p>)}
         {!fetchError &&
-          posts.map((post) => {
-            const userDetails = users.find(
-              (user) => parseInt(user.id) === post.userId,
-            );
-            // console.log(userDetails)
-            return (
-              <div key={post.id}>
-                <div className={styles.postSeprator}></div>
-                <div className={styles.postItem}>
-                  <div className={styles.postNav}>
-                    <div className={styles.UserProfile}>
-                      <img src={userDetails.avatar} alt="?" />
-                      <a href="">r/{userDetails?.username || "Unknown User"}</a>
-                      {/* <span>•</span> */}
-                      <span>{`•${getTimeAgo(post.createdAt)}`}</span>
-                    </div>
-                    <div className={styles.menuJoin}>
-                      <button
-                        className={
-                          isJoinId === post.id ? styles.joined : styles.join
-                        }
-                        onClick={() => {
-                          setIsJoinId(isJoinId === post.id ? null : post.id);
-                        }}
-                      >
-                        {isJoinId === post.id ? "Joined" : "Join"}
-                      </button>
-                      <button
-                        onClick={() =>
-                          setOpenMenuId(openMenuId === post.id ? null : post.id)
-                        }
-                      >
-                        ...
-                      </button>
-                      {openMenuId === post.id && <HandleMenu />}
-                    </div>
-                  </div>
-                  <h2>{post.title}</h2>
-                  <p className={styles.post}>
-                    {post.content.length > 150 ? (
-                      <>
-                        {seeFullContent === post.id
-                          ? post.content
-                          : `${post.content.slice(0, 150)}...`}
-                        <span
-                          style={{ cursor: "pointer", color: "blue" }}
+          posts
+            .filter((post) => post.subreddit.toLowerCase().includes(searchQuery.toLowerCase()))
+            .map((post) => {
+              const userDetails = users.find(
+                (user) => parseInt(user.id) === post.userId,
+              );
+              // console.log(userDetails)
+              return (
+                <div key={post.id}>
+                  <div className={styles.postSeprator}></div>
+                  <div className={styles.postItem}>
+                    <div className={styles.postNav}>
+                      <div className={styles.UserProfile}>
+                        <img src={userDetails.avatar} alt="?" />
+                        <span>r/{post.subreddit}</span>
+
+                        {/* <a href="">r/{userDetails?.username || "Unknown User"}</a> */}
+                        {/* <span>•</span> */}
+                        <span>{`•${getTimeAgo(post.createdAt)}`}</span>
+                      </div>
+                      <div className={styles.menuJoin}>
+                        <button
+                          className={
+                            isJoinId === post.id ? styles.joined : styles.join
+                          }
+                          onClick={() => {
+                            setIsJoinId(isJoinId === post.id ? null : post.id);
+                          }}
+                        >
+                          {isJoinId === post.id ? "Joined" : "Join"}
+                        </button>
+                        <button
                           onClick={() =>
-                            setSeeFullContent(
-                              seeFullContent === post.id ? null : post.id,
-                            )
+                            setOpenMenuId(openMenuId === post.id ? null : post.id)
                           }
                         >
+                          ...
+                        </button>
+                        {openMenuId === post.id && <HandleMenu />}
+                      </div>
+                    </div>
+                    <h2>{post.title}</h2>
+                    <p className={styles.post}>
+                      {post.content.length > 150 ? (
+                        <>
                           {seeFullContent === post.id
-                            ? " Read less"
-                            : " Read more"}
+                            ? post.content
+                            : `${post.content.slice(0, 150)}...`}
+                          <span
+                            style={{ cursor: "pointer", color: "blue" }}
+                            onClick={() =>
+                              setSeeFullContent(
+                                seeFullContent === post.id ? null : post.id,
+                              )
+                            }
+                          >
+                            {seeFullContent === post.id
+                              ? " Read less"
+                              : " Read more"}
+                          </span>
+                        </>
+                      ) : (
+                        post.content
+                      )}
+                    </p>
+                    {post.images && <img src={post.images[0]} alt="" />}
+
+                    <div className={styles.postFooter}>
+                      <span className={styles.votesSystem}>
+                        <button>
+                          <FontAwesomeIcon
+                            className={styles.icon}
+                            icon={faThumbsUp}
+                          />
+                        </button>
+                        <span>
+                          {post.votes < 1000
+                            ? post.votes
+                            : `${Number(post.votes / 1000)}k`}
                         </span>
-                      </>
-                    ) : (
-                      post.content
-                    )}
-                  </p>
-                  {post.images && <img src={post.images[0]} alt="" />}
-
-                  <div className={styles.postFooter}>
-                    <span className={styles.votesSystem}>
-                      <button>
-                        <FontAwesomeIcon
-                          className={styles.icon}
-                          icon={faThumbsUp}
-                        />
-                      </button>
-                      <span>
-                        {post.votes < 1000
-                          ? post.votes
-                          : `${Number(post.votes / 1000)}k`}
+                        <button>
+                          <FontAwesomeIcon
+                            className={styles.icon}
+                            icon={faThumbsDown}
+                          />
+                        </button>
                       </span>
-                      <button>
-                        <FontAwesomeIcon
-                          className={styles.icon}
-                          icon={faThumbsDown}
-                        />
-                      </button>
-                    </span>
 
-                    <a href="/" className={styles.comments}>
-                      <button>
-                        <FontAwesomeIcon
-                          className={styles.icon}
-                          icon={faCommentAlt}
-                        />
-                      </button>
-                      <span className="span">
-                        {post.comments < 1000
-                          ? post.comments
-                          : `${Number(post.comments / 1000)}k`}
+                      <a href="/" className={styles.comments}>
+                        <button>
+                          <FontAwesomeIcon
+                            className={styles.icon}
+                            icon={faCommentAlt}
+                          />
+                        </button>
+                        <span className="span">
+                          {post.comments < 1000
+                            ? post.comments
+                            : `${Number(post.comments / 1000)}k`}
+                        </span>
+                      </a>
+                      <span className={styles.share}>
+                        <button>
+                          <FontAwesomeIcon
+                            className={styles.icon}
+                            icon={faShare}
+                          />
+                        </button>
+                        <span>Share</span>
                       </span>
-                    </a>
-                    <span className={styles.share}>
-                      <button>
-                        <FontAwesomeIcon
-                          className={styles.icon}
-                          icon={faShare}
-                        />
-                      </button>
-                      <span>Share</span>
-                    </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
       </div>
       <aside className={styles.rightSidebar}>
         <PopularCommunities />

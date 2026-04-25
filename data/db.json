@@ -31,13 +31,14 @@
       "avatar": "https://i.pravatar.cc/150?img=6"
     }
   ],
-
   "posts": [
     {
       "id": 1,
       "title": "Just started learning React 🚀",
       "content": "Any tips for beginners?",
-      "images": ["https://picsum.photos/400/300"],
+      "images": [
+        "https://picsum.photos/400/300"
+      ],
       "userId": 1,
       "subreddit": "reactjs",
       "votes": 1200,
@@ -48,7 +49,9 @@
       "id": 2,
       "title": "Best resources for DSA?",
       "content": "I’m currently preparing for placements and feeling overwhelmed because there are so many DSA resources available online. Some people recommend Striver’s sheet, others say LeetCode is enough, while some suggest Codeforces for problem solving. I’m in my second year and want to build strong fundamentals before internship season starts. Can anyone suggest a proper roadmap that worked for them?",
-      "images": ["https://picsum.photos/400/301"],
+      "images": [
+        "https://picsum.photos/400/301"
+      ],
       "userId": 3,
       "subreddit": "programming",
       "votes": 5400,
@@ -59,7 +62,9 @@
       "id": 3,
       "title": "JSON Server saved my frontend life",
       "content": "No backend stress anymore.",
-      "images": ["https://picsum.photos/400/302"],
+      "images": [
+        "https://picsum.photos/400/302"
+      ],
       "userId": 2,
       "subreddit": "webdev",
       "votes": 890,
@@ -70,7 +75,9 @@
       "id": 4,
       "title": "Tailwind vs CSS debate",
       "content": "I’ve been building projects using plain CSS for a long time, but recently everyone seems to be moving toward Tailwind CSS. Some developers say it improves speed and maintainability, while others say it makes JSX messy and unreadable. I’m confused whether I should invest time learning Tailwind deeply or continue mastering traditional CSS and SCSS.",
-      "images": ["https://picsum.photos/400/303"],
+      "images": [
+        "https://picsum.photos/400/303"
+      ],
       "userId": 1,
       "subreddit": "frontend",
       "votes": 12000,
@@ -81,7 +88,9 @@
       "id": 5,
       "title": "Best VS Code extensions?",
       "content": "Share your favorites.",
-      "images": ["https://picsum.photos/400/304"],
+      "images": [
+        "https://picsum.photos/400/304"
+      ],
       "userId": 4,
       "subreddit": "webdev",
       "votes": 2300,
@@ -92,7 +101,9 @@
       "id": 6,
       "title": "Anyone using Next.js 15?",
       "content": "How’s the performance compared to older versions?",
-      "images": ["https://picsum.photos/400/305"],
+      "images": [
+        "https://picsum.photos/400/305"
+      ],
       "userId": 2,
       "subreddit": "nextjs",
       "votes": 6700,
@@ -103,7 +114,9 @@
       "id": 7,
       "title": "My first portfolio website",
       "content": "Built using React + Tailwind. Looking for honest feedback.",
-      "images": ["https://picsum.photos/400/306"],
+      "images": [
+        "https://picsum.photos/400/306"
+      ],
       "userId": 1,
       "subreddit": "frontend",
       "votes": 1800,
@@ -114,7 +127,9 @@
       "id": 8,
       "title": "Python vs Java for DSA",
       "content": "I’ve noticed most people prefer Python for DSA because of its simpler syntax and faster coding during interviews. However, I already know Java pretty well and feel comfortable with object-oriented programming concepts. I’m wondering if switching languages now would waste time or if Python would actually give me an advantage during coding rounds.",
-      "images": ["https://picsum.photos/400/307"],
+      "images": [
+        "https://picsum.photos/400/307"
+      ],
       "userId": 3,
       "subreddit": "learnprogramming",
       "votes": 9100,
@@ -125,7 +140,9 @@
       "id": 9,
       "title": "Dark mode UI inspiration",
       "content": "Show your best designs.",
-      "images": ["https://picsum.photos/400/308"],
+      "images": [
+        "https://picsum.photos/400/308"
+      ],
       "userId": 4,
       "subreddit": "design",
       "votes": 3500,
@@ -136,7 +153,9 @@
       "id": 10,
       "title": "Best laptop for coding?",
       "content": "Budget around 80k INR.",
-      "images": ["https://picsum.photos/400/309"],
+      "images": [
+        "https://picsum.photos/400/309"
+      ],
       "userId": 5,
       "subreddit": "programming",
       "votes": 15000,
@@ -147,7 +166,9 @@
       "id": 11,
       "title": "Learning backend roadmap",
       "content": "Node.js → Express → MongoDB roadmap suggestions?",
-      "images": ["https://picsum.photos/400/310"],
+      "images": [
+        "https://picsum.photos/400/310"
+      ],
       "userId": 5,
       "subreddit": "backend",
       "votes": 2600,
@@ -158,7 +179,9 @@
       "id": 12,
       "title": "AI replacing developers?",
       "content": "With AI tools improving rapidly, many students around me are worried that frontend, backend, and even software engineering jobs may disappear in the future. At the same time, companies are still hiring developers who understand system design, architecture, and product thinking. Do you think AI will replace developers completely, or will it simply change how developers work?",
-      "images": ["https://picsum.photos/400/311"],
+      "images": [
+        "https://picsum.photos/400/311"
+      ],
       "userId": 6,
       "subreddit": "technology",
       "votes": 22000,
@@ -169,7 +192,9 @@
       "id": 13,
       "title": "React interview questions",
       "content": "Share common React interview questions for freshers.",
-      "images": ["https://picsum.photos/400/312"],
+      "images": [
+        "https://picsum.photos/400/312"
+      ],
       "userId": 2,
       "subreddit": "reactjs",
       "votes": 4100,
@@ -180,7 +205,9 @@
       "id": 14,
       "title": "Best free APIs for projects",
       "content": "Need API suggestions for portfolio projects.",
-      "images": ["https://picsum.photos/400/313"],
+      "images": [
+        "https://picsum.photos/400/313"
+      ],
       "userId": 4,
       "subreddit": "webdev",
       "votes": 5300,
@@ -191,7 +218,9 @@
       "id": 15,
       "title": "How to stay consistent in coding?",
       "content": "I start learning consistently for a few days and feel very motivated, but after a week I lose momentum and start procrastinating. Sometimes I compare myself with people on LinkedIn who seem far ahead in their careers. How do you stay disciplined in coding?",
-      "images": ["https://picsum.photos/400/314"],
+      "images": [
+        "https://picsum.photos/400/314"
+      ],
       "userId": 3,
       "subreddit": "programming",
       "votes": 7800,
@@ -202,7 +231,9 @@
       "id": 16,
       "title": "Built a clone project",
       "content": "Made a Netflix clone. Need UI feedback.",
-      "images": ["https://picsum.photos/400/315"],
+      "images": [
+        "https://picsum.photos/400/315"
+      ],
       "userId": 1,
       "subreddit": "frontend",
       "votes": 2900,
@@ -213,7 +244,9 @@
       "id": 17,
       "title": "Best GitHub repos to learn from",
       "content": "Drop your favorite open-source repos.",
-      "images": ["https://picsum.photos/400/316"],
+      "images": [
+        "https://picsum.photos/400/316"
+      ],
       "userId": 5,
       "subreddit": "opensource",
       "votes": 6400,
@@ -224,7 +257,9 @@
       "id": 18,
       "title": "Freelancing as a student",
       "content": "I’m a college student trying to earn money through freelancing while also building my resume. I know web development and built a few projects but I’m confused whether Fiverr and Upwork are worth it. Should I focus on internships instead?",
-      "images": ["https://picsum.photos/400/317"],
+      "images": [
+        "https://picsum.photos/400/317"
+      ],
       "userId": 6,
       "subreddit": "career",
       "votes": 9800,
@@ -235,7 +270,9 @@
       "id": 19,
       "title": "Best UI libraries for React",
       "content": "Material UI vs Shadcn vs Chakra UI?",
-      "images": ["https://picsum.photos/400/318"],
+      "images": [
+        "https://picsum.photos/400/318"
+      ],
       "userId": 2,
       "subreddit": "reactjs",
       "votes": 2100,
@@ -246,7 +283,9 @@
       "id": 20,
       "title": "How I got my first internship",
       "content": "Last year I had zero confidence in coding. After months of DSA practice, project building, and interview prep, I finally landed my first internship after multiple rejections. Sharing this because many students feel stuck right now.",
-      "images": ["https://picsum.photos/400/319"],
+      "images": [
+        "https://picsum.photos/400/319"
+      ],
       "userId": 1,
       "subreddit": "careers",
       "votes": 11000,
