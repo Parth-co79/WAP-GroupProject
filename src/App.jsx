@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 import Main from "./components/Main"
@@ -9,6 +9,15 @@ import CreatePost from "./components/CreatePost.jsx"
 export default function App({handlePost}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [darkMode, setDarkMode] = useState(false);
+
+  // Sync theme with data-theme attribute
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  }, [darkMode]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Initially closed as requested
   const [toggle ,setToggle]=useState(false);
 
